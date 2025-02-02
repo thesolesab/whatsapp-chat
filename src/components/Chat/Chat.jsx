@@ -5,6 +5,7 @@ import fetchAndProcessNotifications from '../../services/fetchAndProcessNotifica
 import ChatHeader from './ChatHeader';
 import MessageList from './MessageList';
 import MessageInput from './MessageInput';
+import getUrl from '../../services/getUrl';
 
 const Chat = ({ idInstance, apiTokenInstance, activeChat }) => {
     const [message, setMessage] = useState('');
@@ -26,7 +27,7 @@ const Chat = ({ idInstance, apiTokenInstance, activeChat }) => {
     const handleSendMessage = useCallback(async () => {
         if (!activeChat?.chatId || !message) return;
 
-        const url = `https://api.greenapi.com/waInstance${idInstance}/SendMessage/${apiTokenInstance}`;
+        const url = getUrl(idInstance, apiTokenInstance, 'SendMessage')
         const payload = {
             chatId: activeChat.chatId,
             message: message,

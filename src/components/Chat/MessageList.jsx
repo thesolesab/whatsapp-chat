@@ -2,7 +2,6 @@ import React, { memo, useEffect, useRef } from 'react';
 import Message from './Message';
 
 const MessageList = memo(({ messages }) => {
-    console.log('MessageList rendered');
     const messagesRef = useRef(null)
 
     useEffect(

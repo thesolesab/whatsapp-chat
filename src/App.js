@@ -3,6 +3,7 @@ import Auth from './components/Auth';
 import Messenger from './pages/Messenger';
 import useHttp from './hooks/useHTTP';
 import Spinner from './components/Spinner';
+import getUrl from './services/getUrl';
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -12,7 +13,7 @@ const App = () => {
   const { request, loading } = useHttp()
 
   const handleAuth = async (idInstance, apiTokenInstance) => {
-    const url = `https://api.green-api.com/waInstance${idInstance}/getStateInstance/${apiTokenInstance}`
+    const url = getUrl(idInstance, apiTokenInstance, 'getStateInstance')
 
     const { stateInstance } = await request(url)
     if (stateInstance === 'authorized') {
@@ -25,7 +26,6 @@ const App = () => {
   return (
     <div className="app">
       <div className="container">
-        {/* <h1>WhatsApp Chat</h1> */}
         {!isAuthenticated ?
           (
             <Auth onAuth={handleAuth} />

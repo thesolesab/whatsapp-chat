@@ -11,7 +11,7 @@ const ChatList = ({ idInstance, apiTokenInstance, activeChat, setActiveChat }) =
 
     useEffect(
         () => {
-            const url = `https://api.green-api.com/waInstance${idInstance}/lastIncomingMessages/${apiTokenInstance}?minutes=1440`;
+            const url = getUrl(idInstance, apiTokenInstance, 'lastIncomingMessages', '?minutes=1440')
 
             request(url)
                 .then(
@@ -41,9 +41,7 @@ const ChatList = ({ idInstance, apiTokenInstance, activeChat, setActiveChat }) =
     // Выбор активного чата
     const handleSelectChat = useCallback((chatId) => {
         setActiveChat(chats.find(el => el.chatId === chatId));
-        console.log(activeChat?.chatId, chatId);
-
-    }, [activeChat?.chatId, chats, setActiveChat]);
+    }, [chats, setActiveChat]);
 
     return (
         <div className="chat-list">

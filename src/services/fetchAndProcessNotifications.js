@@ -1,9 +1,10 @@
+import getUrl from "./getUrl";
 import { saveMessageToDB } from "./indexedDb";
 
 const fetchAndProcessNotifications = async (activeChat, idInstance, apiTokenInstance, request, setMessages) => {
     if (!activeChat?.chatId) return;
 
-    const url = `https://api.greenapi.com/waInstance${idInstance}/ReceiveNotification/${apiTokenInstance}`;
+    const url = getUrl(idInstance, apiTokenInstance, 'ReceiveNotification')
 
     try {
         const response = await request(url);
@@ -29,7 +30,7 @@ const fetchAndProcessNotifications = async (activeChat, idInstance, apiTokenInst
 
             const receiptId = response.receiptId;
             if (receiptId) {
-                const deleteUrl = `https://api.greenapi.com/waInstance${idInstance}/DeleteNotification/${apiTokenInstance}/${receiptId}`;
+                const deleteUrl = getUrl(idInstance, apiTokenInstance, 'DeleteNotification', `/${receiptId}`)
                 await request(deleteUrl, 'DELETE');
             }
         }
