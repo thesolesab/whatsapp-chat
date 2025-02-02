@@ -1,0 +1,15 @@
+.message {
+    background-color: white;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    max-width: 70%;
+    &.user {
+        background-color: #d9fdd3;
+        align-self: flex-end;
+        box-shadow: 1px 1px 5px #00000073;
+    }
+    &.recipient {
+        align-self: flex-start;
+        box-shadow: -1px 1px 5px #00000073;
+    }
+}
